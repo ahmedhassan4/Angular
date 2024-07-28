@@ -1,0 +1,70 @@
+<div class="ekart--product--details--info scroll">
+    <div class="ekart-product-detail-close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <div class="ekart-product-detail-image">
+        <img [src]="product.imageURL" class="ekart-product-detail-image">
+    </div>
+    
+    <div class="ekart-product-detail">
+        <div class="ekart-product-detail-name">
+            <h2>{{product.name}}</h2>
+        </div>
+        <div class="ekart-product-detail-gbc">
+            <span>{{product.gender}}</span>
+            <span>{{product.brand}}</span>
+            <span>{{product.category}}</span>
+        </div>
+        <div class="ekart-product-detail-price">
+            <p>
+                <b>Price Each Pair:</b>
+                @if(product.discountPrice){
+                <span style="background-color: red; color:white"><s>{{product.price}}</s></span>
+                }
+                <span style="background-color: green; color:white">{{product.discountPrice || product.price }}</span> (Inclusive of all taxes)
+            </p>
+        </div>
+        <div class="ekart-product-detail-size">
+            <div style="padding: 5px 0px;border-bottom: #ccc 2px solid">
+                <h4>Available Size</h4>
+            </div>
+            <diV style="margin-top: 20px">
+                @for(size of product.size ;track product.id){
+                <span class="ekart-product-detail-available-size">{{size}}</span>
+                }
+            </diV>                
+        </div>
+
+        <div class="ekart-product-detail-color">
+            <div style="padding: 5px 0px;border-bottom: #ccc 2px solid">
+                <h4>Available Color</h4>
+            </div>
+            <diV style="margin-top: 20px;">
+                @for(color of product.color ;track product.id){
+                <span class="ekart-product-detail-available-color" [ngStyle]="{'background-color': color}"></span>
+                }
+            </diV>                
+        </div>
+
+        <div class="ekart-product-detail-desc">
+            <div style="padding: 5px 0px;border-bottom: #ccc 2px solid">
+                <h4>Product Description</h4>
+            </div>
+            <div style="margin-top: 20px">
+                <p>{{product.description}}</p>
+            </div>                
+        </div>
+    </div>
+    <div class="ekart-product-detail-addtoCart">
+        @if(product.is_in_inventory){
+        <button class="btn-add-to-cart">ADD TO CART</button>
+        }@else {
+            <div *ngTemplateOutlet="notifyMe"></div>
+        }
+
+    <ng-template #notifyMe>
+        <button class="btn-add-to-cart">NOTIFY ME</button>
+    </ng-template>
+    </div>
+</div>
+<div class="overlay"></div>
